@@ -26,19 +26,34 @@ int main(int argc, char **argv)
 	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 	MPI_Comm_size(MPI_COMM_WORLD, &size);
 	
-	char message[100];
+	double a = 0.0, b = 1.0;
+	double local_a, local_b, h;
+	int local_n;
+	double local_result, total_result;
+	
+	int n = (N/size) * size;
+	h = (b-a)/n;
+	local_n = n/size;
+	local_a = a + rank*local_n*h;
+	local_b = a + (rank+1)*local_n*h;
+	
+	local_result = trap_rule(local_a, local_b, local_n);
+	
+	
 	if (rank == 0)
 	{
+		total_result = local_result;
 		for(int source = 1; source < size; source++)
 		{
-			MPI_Recv(message, 100, MPI_CHAR, source, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-			printf("Process %d received: \"%s\"\n", rank, message);
+			double temp;
+			MPI_Recv(&temp, 1, MPI_DOUBLE, source, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+			total_result += temp;
 		}
+		printf("Estimated PI = %.16f\n", total_result);
 	}
 	else
 	{
-		sprintf(message, "Hello I am process %d and I love u UwU",rank);
-		MPI_Send(message, strlen(message) + 1, MPI_CHAR, 0, 0, MPI_COMM_WORLD);
+		MPI_Send(&local_result, 1, MPI_DOUBLE, 0, 0, MPI_COMM_WORLD);
 	}
 	
 	MPI_Finalize();
