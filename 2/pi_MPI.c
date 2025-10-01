@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include <mpi.h>
+#include <sys/time.h>
 
 #define N 1000000
+
+struct timeval s_time, e_time;
 
 double f(double x)
 {
@@ -42,6 +45,8 @@ int main(int argc, char **argv)
 	
 	if (rank == 0)
 	{
+		gettimeofday(&s_time, NULL);
+	
 		total_result = local_result;
 		for(int source = 1; source < size; source++)
 		{
@@ -50,6 +55,11 @@ int main(int argc, char **argv)
 			total_result += temp;
 		}
 		printf("Estimated PI = %.16f\n", total_result);
+		
+		gettimeofday(&e_time, NULL);
+		
+		int ttime = (e_time.tv_sec - s_time.tv_sec) * 1000000 + (e_time.tv_usec - s_time.tv_usec);
+		printf("It took %.6f s !\n", (float)ttime/1000000.0);
 	}
 	else
 	{
