@@ -3,7 +3,7 @@
 #include <mpi.h>
 #include <sys/time.h> // for gettimeofday()
 
-#define N 256  // size of the vector
+#define N 64  // size of the vector
 
 int main(int argc, char** argv) {
     int rank, size, i;
