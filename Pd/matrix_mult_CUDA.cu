@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <assert.h>
 
-#define N 4096
+#define N 8192
 #define BLOCK_SIZE_DIM 16
 
 #define err(format, ...) do { fprintf(stderr, format, ##__VA_ARGS__); exit(1); } while (0)
