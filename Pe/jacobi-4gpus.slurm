@@ -21,7 +21,7 @@ make clean
 #make optimized
 make cub
 
-for i in 1 2 4 8 16 32; do
+for i in 8 16 32; do
   for j in 8192 16384 32768; do
 	mpirun -np $i ./jacobi -niter 100000 -nx $j -ny $j
   done
