@@ -16,6 +16,6 @@
 module purge
 module load singularity
 
-SINGULARITY_CONTAINER=/gpfs/scratch/nct01029/MN5-NGC-TensorFlow-23.03.sif
+SINGULARITY_CONTAINER=/gpfs/projects/nct_345/MN5-NGC-TensorFlow-23.03.sif
 
 singularity exec $SINGULARITY_CONTAINER python cnn_train.py
