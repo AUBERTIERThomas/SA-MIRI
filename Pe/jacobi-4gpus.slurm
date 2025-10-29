@@ -3,8 +3,8 @@
 #SBATCH -o %x_%J.out
 #SBATCH -e %x_%J.err
 
-#SBATCH --nodes=1
-#SBATCH --time=02:00:00
+#SBATCH --nodes=8
+#SBATCH --time=01:30:00
 #SBATCH --ntasks-per-node=4
 #SBATCH --cpus-per-task=1
 #SBATCH --gres=gpu:4
