@@ -13,9 +13,9 @@ from tensorflow.keras.layers import Input
 
 model = Sequential()
 model.add(Input(shape=(28, 28, 1)))  # Define the input shape here
-model.add(Conv2D(64, (5, 5), activation='relu'))
+model.add(Conv2D(32, (5, 5), activation='relu'))
 model.add(MaxPooling2D((2, 2)))
-model.add(Conv2D(128, (5, 5), activation='relu'))
+model.add(Conv2D(64, (5, 5), activation='relu'))
 model.add(MaxPooling2D((2, 2)))
 
 from tensorflow.keras.layers import Dense
@@ -27,10 +27,17 @@ model.summary()
 
 from tensorflow.keras.utils import to_categorical
 
-#mnist = tf.keras.datasets.mnist(train_images, train_labels), (test_images, test_labels) = mnist.load_data(path='/gpfs/projects/nct00/nct00002/basics-utils/mnist.npz')
+def load_data(path):
+    with np.load(path) as f:
+        x_train, y_train = f['x_train'], f['y_train']
+        x_test, y_test = f['x_test'], f['y_test']
+        return (x_train, y_train), (x_test, y_test)
 
 mnist = tf.keras.datasets.mnist
-(train_images, train_labels), (test_images, test_labels) = mnist.load_data()
+(train_images, train_labels), (test_images, test_labels) = load_data(path='mnist.npz')#path='/gpfs/projects/nct00/nct00002/basics-utils/mnist.npz')
+
+#mnist = tf.keras.datasets.mnist
+#(train_images, train_labels), (test_images, test_labels) = mnist.load_data()
 
 print (train_images.shape)
 print (train_labels.shape)
