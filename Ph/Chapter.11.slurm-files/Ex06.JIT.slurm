@@ -11,7 +11,7 @@
 #SBATCH --gres gpu:1                
 #SBATCH --cpus-per-task 20          
 #SBATCH --time 02:00:00      
-#SBATCH --account bsc31
+#SBATCH --account nct_345
 #SBATCH --qos acc_debug
 #SBATCH --exclusive
 
@@ -19,16 +19,16 @@
 module purge
 module load singularity
 
-MODEL=vit                # --model_name: custom | vit 
+MODEL=custom                # --model_name: custom | vit 
 
-DS=./datasets/micro-224  # --dataset: tiny-224 | micro-224
+DS=/gpfs/projects/nct_345/datasets/tiny-224  # --dataset: tiny-224 | micro-224
 EPOCHS=5                 # --num_epochs
 NW=10                     # --num_workers
 OPTIM=sgd                # --optimizer 
 LOG_ITER=500             # --iteration_logging
 EPOCHS_EVAL_FREQ=5       # --epochs_eval
 
-BS=128                   # --batch_size & --eval_batch_size
+BS=256                   # --batch_size & --eval_batch_size
 
     PYTHON_FILE=./train.py
     PYTHON_ARGS="--model_name $MODEL \

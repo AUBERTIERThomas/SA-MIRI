@@ -11,7 +11,7 @@
 #SBATCH --gres gpu:1                
 #SBATCH --cpus-per-task 20          
 #SBATCH --time 02:00:00      
-#SBATCH --account bsc31
+#SBATCH --account nct_345
 #SBATCH --qos acc_debug
 #SBATCH --exclusive
 
@@ -21,7 +21,7 @@ module load singularity
 
 MODEL=custom             # --model_name: custom | vit 
 
-DS=./datasets/tiny-224   # --dataset: tiny-224 | micro-224
+DS=/gpfs/projects/nct_345/datasets/tiny-224   # --dataset: tiny-224 | micro-224
 EPOCHS=5                 # --num_epochs
 BS=10                    # --batch_size & --eval_batch_size
 NW=0                     # --num_workers
@@ -34,7 +34,7 @@ EPOCHS_EVAL_FREQ=5       # --epochs_eval
 #    --compile \
 
 BS=256
-NUM_WORKERS=(0 1 2 4 8 10 16 20 24)
+NUM_WORKERS=(10)
 
 for NW in "${NUM_WORKERS[@]}"; do
     echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Running with num_workers $NW"

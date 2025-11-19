@@ -19,7 +19,7 @@
 module purge
 module load singularity
 
-MODEL=vit                # --model_name: custom | vit 
+MODEL=custom                # --model_name: custom | vit 
 
 DS=/gpfs/projects/nct_345/datasets/micro-224  # --dataset: tiny-224 | micro-224
 EPOCHS=5                 # --num_epochs
