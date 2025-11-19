@@ -3,15 +3,15 @@
 #SBATCH --job-name Ex02.MNumWorkers
 
 #SBATCH --chdir . 
-#SBATCH --output ./results/R-%x.%j.out
-#SBATCH --error ./results/R-%x.%j.err
+#SBATCH --output R-%x.%j.out
+#SBATCH --error R-%x.%j.err
 
 #SBATCH --nodes 1                   
 #SBATCH --ntasks-per-node 1         
 #SBATCH --gres gpu:1                
 #SBATCH --cpus-per-task 20          
 #SBATCH --time 02:00:00      
-#SBATCH --account bsc31
+#SBATCH --account nct_345
 #SBATCH --qos acc_debug
 #SBATCH --exclusive
 
@@ -21,10 +21,10 @@ module load singularity
 
 MODEL=custom             # --model_name: custom | vit 
 
-DS=./datasets/tiny-224   # --dataset: tiny-224 | micro-224
+DS=/gpfs/projects/nct_345/datasets/micro-224   # --dataset: tiny-224 | micro-224
 EPOCHS=5                 # --num_epochs
 BS=10                    # --batch_size & --eval_batch_size
-NW=0                     # --num_workers
+NW=1                     # --num_workers
 OPTIM=sgd                # --optimizer 
 LOG_ITER=500             # --iteration_logging
 EPOCHS_EVAL_FREQ=5       # --epochs_eval
@@ -33,7 +33,7 @@ EPOCHS_EVAL_FREQ=5       # --epochs_eval
 #    --mixed_precision bf16 \  # bf16 or fp16 and default fp32
 #    --compile \
 
-BATCH_SIZES=(32 64 128 256 512)
+BATCH_SIZES=(256)
 
 for BS in "${BATCH_SIZES[@]}"; do
     echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Running with batch size $BS"
