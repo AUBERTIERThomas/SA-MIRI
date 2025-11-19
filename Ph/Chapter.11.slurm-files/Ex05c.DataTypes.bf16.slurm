@@ -11,7 +11,7 @@
 #SBATCH --gres gpu:1                
 #SBATCH --cpus-per-task 20          
 #SBATCH --time 02:00:00      
-#SBATCH --account bsc31
+#SBATCH --account nct_345
 #SBATCH --qos acc_debug
 #SBATCH --exclusive
 
@@ -21,7 +21,7 @@ module load singularity
 
 MODEL=vit                # --model_name: custom | vit 
 
-DS=./datasets/micro-224  # --dataset: tiny-224 | micro-224
+DS=/gpfs/projects/nct_345/datasets/micro-224  # --dataset: tiny-224 | micro-224
 EPOCHS=5                 # --num_epochs
 BS=10                    # --batch_size & --eval_batch_size
 NW=10                     # --num_workers
