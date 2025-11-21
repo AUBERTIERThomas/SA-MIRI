@@ -8,7 +8,7 @@
 #SBATCH --gres=gpu:2
 #SBATCH --cpus-per-task=40
 #SBATCH --time=01:30:00
-#SBATCH --account=bsc31
+#SBATCH --account=nct_345
 #SBATCH --qos=acc_debug
 #SBATCH --exclusive
 
@@ -20,7 +20,7 @@ MASTER_ADDR=$(scontrol show hostnames $SLURM_JOB_NODELIST | head -n 1)
 MASTER_PORT=6000
 
 MODEL="vit"
-DATASET="./datasets/tiny-224"
+DATASET="/gpfs/projects/nct_345/datasets/tiny-224"
 EPOCHS=5
 BS=128
 NW=10
