@@ -10,7 +10,7 @@
 #SBATCH --gres gpu:1                
 #SBATCH --cpus-per-task 20          
 #SBATCH --time 00:29:59             
-#SBATCH --account bsc31
+#SBATCH --account nct_345
 #SBATCH --qos acc_debug
 #SBATCH --exclusive
 
@@ -37,7 +37,7 @@ LAUNCHER="torchrun \
     --tee 3 \
     "
 
-PATH_TO_MODEL=./Llama-3.2-1B
+PATH_TO_MODEL=/gpfs/projects/nct_345/Llama-3.2-1B
 MODEL=LLAMA3.2-1B
 
 MAX_STEPS=450
